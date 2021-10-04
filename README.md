@@ -1,3 +1,3 @@
 # FastAPI with Serverless (Lambda)
 
- A simple Python API to manage users.
+ A simple Python API server to manage users.
