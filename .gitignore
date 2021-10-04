@@ -8,6 +8,10 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# zip files
+
+*.zip
+
 # C extensions
 *.so
 
