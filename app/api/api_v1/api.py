@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from .endpoints import users
+from .endpoints import coins
 
 router = APIRouter()
-router.include_router(users.router, prefix="/users", tags=["users"])
+router.include_router(coins.router, prefix="/coins", tags=["coins"])
