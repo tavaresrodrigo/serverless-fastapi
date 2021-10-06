@@ -2,3 +2,5 @@ fastapi[all]
 uvicorn
 starlette
 mangum
+boto3
+motor 
