@@ -3,18 +3,18 @@ provider "aws" {
     region = "eu-west-1"
 }
 
-# resource "aws_s3_bucket" "s3_bucket_serverless-fastapi" {
-#   bucket = "serverless-fastapi"
+# resource "aws_s3_bucket" "s3_bucket_coinfast" {
+#   bucket = "coinfast"
 #   acl    = "private"
 
 #   tags = {
-#     Name        = "serverless-fastapi"
+#     Name        = "coinfast"
 #     Environment = "/api/v1"
 #   }
 # }
 
 # resource "aws_s3_bucket_object" "s3-object" {
-#   bucket = aws_s3_bucket.s3_bucket_serverless-fastapi.id
+#   bucket = aws_s3_bucket.s3_bucket_coinfast.id
 #   key = "function.zip"
 #   source = "function.zip"
 # }
@@ -40,9 +40,9 @@ resource "aws_iam_role" "iam_for_lambda" {
 EOF
 }
 
-resource "aws_lambda_function" "lambda-serverless-fastapi" {
+resource "aws_lambda_function" "coinfast" {
   filename      = "../function.zip"
-  function_name = "serverless-fastapi"
+  function_name = "coinfast"
   role          = aws_iam_role.iam_for_lambda.arn
   handler       = "app.main.handler"
 
@@ -58,7 +58,58 @@ resource "aws_lambda_function" "lambda-serverless-fastapi" {
 
   }
   tags = {
-    Name        = "serverless-fastapi"
+    Name        = "coinfast"
     Environment = "/api/v1"
   }
+}
+
+
+resource "aws_dynamodb_table" "sensors-dynamodb-table" {
+  name           = "Sensors"
+  billing_mode   = "PROVISIONED"
+  read_capacity  = 5
+  write_capacity = 5
+  hash_key       = "transactionId"
+  range_key      = "coinId"
+
+  attribute {
+    name = "transactionId"
+    type = "S"
+  }
+
+  attribute {
+    name = "transactionDate"
+    type = "S"
+  }
+
+  attribute {
+    name = "coinId"
+    type = "S"
+  }
+
+  attribute {
+    name = "coinName"
+    type = "S"
+  }
+
+    attribute {
+    name = "coinUnities"
+    type = "N"
+  }
+
+    attribute {
+    name = "coinPurchasePrice"
+    type = "N"
+  }
+  
+    attribute {
+    name = "coinBEP"
+    type = "S"
+  }
+
+  tags = {
+    Name        = "coinfast"
+    Environment = "/api/v1"
+  }
+
 }
