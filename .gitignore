@@ -4,6 +4,10 @@
 *.tfstate.*
 *.hcl*
 
+frontend/src/
+frontend/yarn*
+frontend/public/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

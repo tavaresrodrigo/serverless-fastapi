@@ -1,11 +1,11 @@
+from typing import Optional
 from pydantic import BaseModel
+from datetime import datetime
 
 class Order(BaseModel):
-    orderId: str
-    orderDate: str
+    orderId: int
+    orderDate: Optional[datetime] = None
     coinId: str
-    coinName: str
     coinUnities: float
     coinPurchasePrice: float
-    coinBEP: float
    
